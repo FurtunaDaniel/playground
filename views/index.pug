@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1(class="page-heading") Assist testimonials
+  div(class="row")
+    //- h2 Testimonials
+
+    each object, index in testimonials
+      section(class="col-md-3 col-sm-6")
+
+        div(class="card mb-2")
+          div(class="card-body")
+            div(class="card-title text-center")= object.country
+              span(class="testimonials-number") (#{ object.author.length } #{ object.author.length> 1 ? " testimonials": "testimonial" })
+            //- Example Interpolation for author name order
+            - object.author.sort( (a, b) => {
+            -   return a["name"].localeCompare(b["name"])
+            - })
+            each author in object.author
+              div(class="card-author")
+                img(src= author.url, class="rounded-circle float-left image-small  d-inline-block")
+                div(class="author-name")= author.name
+
